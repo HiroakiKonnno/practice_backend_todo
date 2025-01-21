@@ -1,0 +1,46 @@
+# version プロパティは廃止
+
+# コンテナの定義
+services:
+  # サービス名 db とする
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    # 環境変数の設定
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: todo_development
+    # データマウントの設定
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+# todo_backendのImageを作成
+  todo_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # サーバプロセスID(pid)ファイル強制的に削除し、新しくサーバ起動できるようにする
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+    # 依存関係
+    depends_on:
+    # dbサービスが起動してから起動することを指定
+      - db
+    environment:
+      DATABASE_URL: mysql2://root:password@db:3306/todo_development
+      RAILS_ENV: development
+    # フォアグラウンドで実行されるプロセスがなくてもコンテナを起動させたままにする（デバッグ時などにコンテナ内に入れるようにする）
+    tty: true
+    # デバッグ時にキーボード入力ができるようにする
+    stdin_open: true
+
+volumes:
+  mysql_data:
+  bundle:
+  node_modules:
+  packs:
