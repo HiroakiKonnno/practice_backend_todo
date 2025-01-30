@@ -1,0 +1,130 @@
+openapi: 3.1.0
+
+info:
+  title: Task API
+  description: Todoアプリでタスクの一覧表示、詳細表示、作成、編集、削除ができる
+  version: 1.0.0
+
+severs:
+  - url: http:localhost:3000/api/v1
+    description: Development sever
+
+tags:
+  name: task
+  description: タスクに関するエンドポイント
+
+paths:
+  /tasks:
+    get:
+      summary: タスクの一覧ページを取得
+      tags:
+        - Task
+      responses:
+        "200":
+          description: すべてのタスクを画面に表示する
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: number
+                title:
+                  type: string
+                content:
+                  type: string
+                created_at:
+                  type: number
+                update_at:
+                  type: number
+    post:
+      summary: タスクの新規作成
+      tags:
+        - Task
+      responses:
+        "200":
+          description: 新規タスクをDBに追加する
+          schema:
+            type: object
+            properties:
+              id:
+                type: number
+              title:
+                type: string
+              content:
+                type: string
+              created_at:
+                type: number
+              update_at:
+                type: number
+
+  tasks/:postId:
+    get:
+      summary: 各タスクの詳細ページを取得
+      tags:
+        - Task
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: 一つのタスクの詳細ページを画面に表示する
+          schema:
+            type: object
+            properties:
+              id:
+                type: number
+              title:
+                type: string
+              content:
+                type: string
+              created_at:
+                type: number
+              update_at:
+                type: number
+    put:
+      summary: 各タスクの内容を更新
+      tags:
+        - Task
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: 一つのタスクを更新する
+          schema:
+            type: object
+    delete:
+      summary: 各タスクを削除
+      tags:
+        - Task
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 一つのタスクを削除する
+
+  /tasks/new:
+    get:
+      summary: タスクの新規作成フォームの取得
+      tags:
+        - Task
+      responses:
+        200:
+          description: タスクの新規作成フォームを画面に表示する
+
+  /tasks/:postId/edit:
+    get:
+      summary: タスクの編集フォームの取得
+      tags:
+        - Task
+      responses:
+        200:
+          description: タスクの編集フォームを画面に表示する
