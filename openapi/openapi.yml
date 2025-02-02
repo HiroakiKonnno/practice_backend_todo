@@ -46,69 +46,39 @@ paths:
                     title: 新規タスクの作成
                     content: 新規タスクを作成する
                     created_at: "2025-02-01T00:00:00Z"
-                    update_at: "2025-02-01T00:00:00Z"
-        "400":
-          description: 不正なリクエストパラメータ
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    description: エラーコード
-                  message:
-                    type: string
-                    description: エラー内容
-              example:
-                code: 400
-                message: "不正なリクエストがされました"
-        "404":
-          description: リクエストされたタスクが存在しない
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    description: エラーコード
-                  message:
-                    type: string
-                    description: エラー内容
-              example:
-                code: 404
-                message: "リクエストされたタスクは存在しません"
+                    updated_at: "2025-02-01T00:00:00Z"
     post:
       summary: タスクの新規作成
       tags:
         - Task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                content:
+                  type: string
+                created_at:
+                  type: string
+                  format: date-time
+                updated_at:
+                  type: string
+                  format: date-time
+            example:
+              - id: 1
+                title: 新規タスクの作成
+                content: 新規タスクを作成する
+                created_at: "2025-02-01T00:00:00Z"
+                update_at: "2025-02-01T00:00:00Z"
       responses:
         "201":
           description: 新規作成に成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  title:
-                    type: string
-                  content:
-                    type: string
-                  created_at:
-                    type: string
-                    format: date-time
-                  update_at:
-                    type: string
-                    format: date-time
-                example:
-                  - id: 1
-                    title: 新規タスクの作成
-                    content: 新規タスクを作成する
-                    created_at: "2025-02-01T00:00:00Z"
-                    update_at:
         "400":
           description: リクエストボディが不正
           content:
@@ -154,7 +124,7 @@ paths:
                   created_at:
                     type: string
                     format: date-time
-                  update_at:
+                  updated_at:
                     type: string
                     format: date-time
                 example:
@@ -162,7 +132,7 @@ paths:
                     title: 新規タスクの作成
                     content: 新規タスクを作成する
                     created_at: "2025-02-01T00:00:00Z"
-                    update_at: "2025-02-01T00:00:00Z"
+                    updated_at: "2025-02-01T00:00:00Z"
         "400":
           description: 不正なidがリクエストされた
           content:
@@ -205,32 +175,34 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                content:
+                  type: string
+                created_at:
+                  type: string
+                  format: date-time
+                updated_at:
+                  type: string
+                  format: date-time
+            example:
+              - id: 1
+                title: 既存タスクの編集
+                content: 既存タスクを編集する
+                created_at: "2025-02-01T00:00:00Z"
+                update_at: "2025-02-01T00:00:00Z"
       responses:
         "200":
           description: タスクの更新に成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  title:
-                    type: string
-                  content:
-                    type: string
-                  created_at:
-                    type: string
-                    format: date-time
-                  update_at:
-                    type: string
-                    format: date-time
-              example:
-                - id: 1
-                  title: 新規タスクの作成
-                  content: 新規タスクを作成する
-                  created_at: "2025-02-01T00:00:00Z"
-                  update_at: "2025-02-01T00:00:00Z"
         "400":
           description: リクエストボディが不正
           content:
@@ -274,7 +246,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        "204":
           description: タスクの削除に成功
         "404":
           description: リクエストされたタスクが存在しない
