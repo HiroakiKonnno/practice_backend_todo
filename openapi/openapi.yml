@@ -21,7 +21,7 @@ paths:
         - Task
       responses:
         "200":
-          description: OK
+          description: タスク一覧の取得に成功
           content:
             application/json:
               schema:
@@ -47,13 +47,45 @@ paths:
                     content: 新規タスクを作成する
                     created_at: "2025-02-01T00:00:00Z"
                     update_at: "2025-02-01T00:00:00Z"
+        "400":
+          description: 不正なリクエストパラメータ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: エラーコード
+                  message:
+                    type: string
+                    description: エラー内容
+              example:
+                code: 400
+                message: "不正なリクエストがされました"
+        "404":
+          description: リクエストされたタスクが存在しない
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: エラーコード
+                  message:
+                    type: string
+                    description: エラー内容
+              example:
+                code: 404
+                message: "リクエストされたタスクは存在しません"
     post:
       summary: タスクの新規作成
       tags:
         - Task
       responses:
         "201":
-          description: OK
+          description: 新規作成に成功
           content:
             application/json:
               schema:
@@ -71,12 +103,28 @@ paths:
                   update_at:
                     type: string
                     format: date-time
-
-        "500":
-          description: サーバー側の処理で問題が発生した
-
-        "502":
-          description: 意図しないパラメータがリクエストされた
+                example:
+                  - id: 1
+                    title: 新規タスクの作成
+                    content: 新規タスクを作成する
+                    created_at: "2025-02-01T00:00:00Z"
+                    update_at:
+        "400":
+          description: リクエストボディが不正
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: エラーコード
+                  message:
+                    type: string
+                    description: エラー内容
+              example:
+                code: 400
+                message: "リクエスト内容に不備があります"
 
   /tasks/{id}:
     get:
@@ -91,7 +139,7 @@ paths:
             type: string
       responses:
         "200":
-          description: OK
+          description: タスク詳細の取得に成功
           content:
             application/json:
               schema:
@@ -115,12 +163,38 @@ paths:
                     content: 新規タスクを作成する
                     created_at: "2025-02-01T00:00:00Z"
                     update_at: "2025-02-01T00:00:00Z"
-
-        "500":
-          description: サーバー側の処理で問題が発生した
-
-        "502":
-          description: 意図しないパラメータがリクエストされた
+        "400":
+          description: 不正なidがリクエストされた
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: エラーコード
+                  message:
+                    type: string
+                    description: エラー内容
+              example:
+                code: 400
+                message: "不正なリクエストがされました"
+        "404":
+          description: リクエストされたタスクが存在しない
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: エラーコード
+                  message:
+                    type: string
+                    description: エラー内容
+              example:
+                code: 404
+                message: "リクエストされたタスクは存在しません"
     put:
       summary: 各タスクの内容を更新
       tags:
@@ -133,15 +207,62 @@ paths:
             type: string
       responses:
         "200":
-          description: 一つのタスクを更新する
+          description: タスクの更新に成功
           content:
             application/json:
               schema:
                 type: object
-        "500":
-          description: サーバー側の処理で問題が発生した
-        "502":
-          description: 意図しないパラメータがリクエストされた
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  content:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  update_at:
+                    type: string
+                    format: date-time
+              example:
+                - id: 1
+                  title: 新規タスクの作成
+                  content: 新規タスクを作成する
+                  created_at: "2025-02-01T00:00:00Z"
+                  update_at: "2025-02-01T00:00:00Z"
+        "400":
+          description: リクエストボディが不正
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: エラーコード
+                  message:
+                    type: string
+                    description: エラー内容
+              example:
+                code: 400
+                message: "リクエスト内容に不備があります"
+        "404":
+          description: リクエストされたタスクが存在しない
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: エラーコード
+                  message:
+                    type: string
+                    description: エラー内容
+              example:
+                code: 404
+                message: "リクエストされたタスクは存在しません"
     delete:
       summary: 各タスクを削除
       tags:
@@ -154,10 +275,20 @@ paths:
             type: string
       responses:
         "200":
-          description: 一つのタスクを削除する
-
-        "500":
-          description: サーバー側の処理で問題が発生した
-
-        "502":
-          description: 意図しないパラメータがリクエストされた
+          description: タスクの削除に成功
+        "404":
+          description: リクエストされたタスクが存在しない
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: エラーコード
+                  message:
+                    type: string
+                    description: エラー内容
+              example:
+                code: 404
+                message: "リクエストされたタスクは存在しません"
