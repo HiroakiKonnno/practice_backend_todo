@@ -83,11 +83,11 @@ paths:
                 - created_at
                 - updated_at
             example:
-              - id: 1
-                title: 新規タスクの作成
-                content: 新規タスクを作成する
-                created_at: "2025-02-01T00:00:00Z"
-                update_at: "2025-02-01T00:00:00Z"
+              id: 1
+              title: 新規タスクの作成
+              content: 新規タスクを作成する
+              created_at: "2025-02-01T00:00:00Z"
+              update_at: "2025-02-01T00:00:00Z"
       responses:
         "201":
           description: 新規作成に成功
@@ -115,13 +115,13 @@ paths:
                     - title
                     - content
                     - created_at
-                    - updated_at                      
+                    - updated_at
                 example:
-                  - id: 1
-                    title: 新規タスクの作成
-                    content: 新規タスクを作成する
-                    created_at: "2025-02-01T00:00:00Z"
-                    updated_at: "2025-02-01T00:00:00Z"
+                  id: 1
+                  title: 新規タスクの作成
+                  content: 新規タスクを作成する
+                  created_at: "2025-02-01T00:00:00Z"
+                  updated_at: "2025-02-01T00:00:00Z"
         "400":
           description: リクエストボディが不正
           content:
@@ -177,11 +177,11 @@ paths:
                   - created_at
                   - updated_at
                 example:
-                  - id: 1
-                    title: 新規タスクの作成
-                    content: 新規タスクを作成する
-                    created_at: "2025-02-01T00:00:00Z"
-                    updated_at: "2025-02-01T00:00:00Z"
+                  id: 1
+                  title: 新規タスクの作成
+                  content: 新規タスクを作成する
+                  created_at: "2025-02-01T00:00:00Z"
+                  updated_at: "2025-02-01T00:00:00Z"
         "400":
           description: 不正なidがリクエストされた
           content:
@@ -250,11 +250,11 @@ paths:
                 - created_at
                 - updated_at
             example:
-              - id: 1
-                title: 既存タスクの編集
-                content: 既存タスクを編集する
-                created_at: "2025-02-01T00:00:00Z"
-                update_at: "2025-02-01T00:00:00Z"
+              id: 1
+              title: 既存タスクの編集
+              content: 既存タスクを編集する
+              created_at: "2025-02-01T00:00:00Z"
+              update_at: "2025-02-01T00:00:00Z"
       responses:
         "200":
           description: タスクの更新に成功
@@ -282,13 +282,13 @@ paths:
                     - title
                     - content
                     - created_at
-                    - updated_at                      
+                    - updated_at
                 example:
-                  - id: 1
-                    title: 新規タスクの作成
-                    content: 新規タスクを作成する
-                    created_at: "2025-02-01T00:00:00Z"
-                    updated_at: "2025-02-01T00:00:00Z"
+                  id: 1
+                  title: 新規タスクの作成
+                  content: 新規タスクを作成する
+                  created_at: "2025-02-01T00:00:00Z"
+                  updated_at: "2025-02-01T00:00:00Z"
         "400":
           description: リクエストボディが不正
           content:
