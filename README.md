@@ -21,4 +21,4 @@
 
 1. docker-compose up -d で Docker を起動
 
-2. Postman で http://localhost:8080 に対しエンドポイントを設定してリクエストを送信KA
+2. Postman で http://localhost:8080 に対しエンドポイントを設定してリクエストを送信
