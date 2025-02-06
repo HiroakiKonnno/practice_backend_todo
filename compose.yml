@@ -39,6 +39,14 @@ services:
     # デバッグ時にキーボード入力ができるようにする
     stdin_open: true
 
+  prism:
+    image: stoplight/prism:latest
+    command: 'mock -h 0.0.0.0 /tmp/openapi.yml'
+    volumes:
+      - ./openapi/openapi.yml:/tmp/openapi.yml:ro
+    ports:
+      - '8080:4010'
+
 volumes:
   mysql_data:
   bundle:
