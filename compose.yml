@@ -10,11 +10,37 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: todo_development
+      MYSQL_USER: manager
+      MYSQL_PASSWORD: password
     # データマウントの設定
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./db/sqldef/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "manager", "-ppassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  mysqldef:
+    build:
+      context: ./db/sqldef/
+      dockerfile: Dockerfile
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=manager
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=todo_development
+      - MYSQL_PORT=3306
+      - SQLDEF_ACTION=apply
+    volumes:
+      - ./db/sqldef:/app
+      # 依存関係
+    depends_on:
+    # dbサービスが起動してからtodo_backendが起動することを指定
+      db:
+        condition: service_healthy
 
 # todo_backendのImageを作成
   todo_backend:
