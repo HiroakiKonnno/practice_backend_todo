@@ -19,6 +19,6 @@
 
 ## API テスト
 
-1. docker-compose up -d で Docker を起動
+1. docker-compose up -d で Docker を起動（すでに Docker を起動済みの場合は、再起動）
 
-2. Postman で http://localhost:8080 に対しエンドポイントを設定してリクエストを送信
+2. Postman で http://localhost:8080/api/v1 に対しエンドポイントを設定してリクエストを送信
