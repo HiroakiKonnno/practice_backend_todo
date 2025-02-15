@@ -65,6 +65,25 @@ services:
     # デバッグ時にキーボード入力ができるようにする
     stdin_open: true
 
+# モックサーバーのリバースプロキシを設定
+  nginx:
+    image: nginx:1.19-alpine
+    ports:
+      - 8080:8080
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - prism
+
+# モックサーバーを設定
+  prism:
+    image: stoplight/prism:latest
+    command: 'mock --host 0.0.0.0 /tmp/openapi.yml'
+    volumes:
+      - ./openapi/openapi.yml:/tmp/openapi.yml:ro
+    ports:
+      - "4010:4010"
+
 volumes:
   mysql_data:
   bundle:
