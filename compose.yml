@@ -39,6 +39,7 @@ services:
     # デバッグ時にキーボード入力ができるようにする
     stdin_open: true
 
+# モックサーバーのリバースプロキシを設定
   nginx:
     image: nginx:1.19-alpine
     ports:
@@ -48,6 +49,7 @@ services:
     depends_on:
       - prism
 
+# モックサーバーを設定
   prism:
     image: stoplight/prism:latest
     command: 'mock --host 0.0.0.0 /tmp/openapi.yml'
