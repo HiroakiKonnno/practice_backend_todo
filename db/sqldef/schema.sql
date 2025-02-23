@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS tasks (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id BIGINT NOT NULL,
+    user_id BIGINT,
     title VARCHAR(255) NOT NULL,
     content TEXT,
-    task_status INT NOT NULL DEFAULT 0,
+    task_status INT DEFAULT 0,
     start_date DATE,
     end_date DATE,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
