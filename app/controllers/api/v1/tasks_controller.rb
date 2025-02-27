@@ -15,7 +15,7 @@ module Api
         if @task.save
           render json: @task, serializer: TaskSerializer, status: :created
         else
-          render json: {errors: @task.errors.full_messages}, status: :unprocessable_entity
+          render json: {errors: @task.errors.messages[:title]}, status: :unprocessable_entity
         end
       end
 
