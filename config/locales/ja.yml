@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        task:
+          attributes:
+            title:
+              blank: "タイトルを入力してください"
+              too_short: "タイトルは3文字以上256文字以内で入力してください"
+              too_long: "タイトルは3文字以上256文字以内で入力してください"
